@@ -6,11 +6,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: process.env.VITE_PORT || 5173,
-    host: '0.0.0.0',
+    host: true,
   },
   preview: {
     port: 3000,
-    host: '0.0.0.0',
-    allowedHosts: 'all', // Permitir todos los hosts en preview
+    host: true,
+    strictPort: false,
+    cors: true,
   },
 })
