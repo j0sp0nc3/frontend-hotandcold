@@ -8,7 +8,7 @@ export default defineConfig({
     port: process.env.VITE_PORT || 5173, // Puerto 5173 en desarrollo, configurable via env
     host: '0.0.0.0', // Escucha en todas las interfaces de red
     preview: {
-      allowedHosts: ['hotandcold.onrender.com'], // Permite el dominio de Render
+      allowedHosts: ['hotandcold.onrender.com', 'backend-hotandcold.onrender.com', 'frontend-hotandcold.onrender.com'], // Permite dominios de Render
     },
   },
 })
