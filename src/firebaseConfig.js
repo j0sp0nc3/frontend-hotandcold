@@ -6,12 +6,12 @@ import { getStorage } from "firebase/storage";
 
 // Configuración de Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyChNbvvWg49ZhvH7cdf5OUDpRm_eKqPzqg",
-  authDomain: "hotandcold-15168.firebaseapp.com",
-  projectId: "hotandcold-15168",
-  storageBucket: "hotandcold-15168.firebasestorage.app",
-  messagingSenderId: "260161120532",
-  appId: "1:260161120532:web:cdaab6ddb9c338be863a01"
+  apiKey: "AIzaSyCD9RqRnAhxMn204sZDnB9uLi4AEwb9esQ",
+  authDomain: "hotandcold-nuevo-245ed.firebaseapp.com",
+  projectId: "hotandcold-nuevo-245ed",
+  storageBucket: "hotandcold-nuevo-245ed.firebasestorage.app",
+  messagingSenderId: "314129479730",
+  appId: "1:314129479730:web:348b70311579f7ce11a42b"
 };
 
 // Inicializa Firebase
