@@ -67,8 +67,7 @@ const ImageUpload = () => {
         formData
       );
 
-      const imageUrl = res.data.secure_url;
-      setImageUrl(imageUrl);
+      setImageUrl(res.data.secure_url);
 
       await addDoc(collection(db, "productos"), {
         title,

@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Navbar from "../components/navbar"; // Importa el Navbar
 import Footer from "../components/footer";
 import '../components/calefaccion.css';
 
 const Climatizacion = () => {
-  const [navbarHeight, setNavbarHeight] = useState(0);
-
   useEffect(() => {
-    const navbar = document.querySelector(".navbar");
-    setNavbarHeight(navbar.offsetHeight);
+    // Navbar reference not needed for this effect
   }, []);
 
   document.addEventListener("scroll", function () {

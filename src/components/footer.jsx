@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './navbar.css';
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/apiConfig";
 
 const Footer = () => {
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ const mostrarMensaje = (texto, tipo = "success") => {
     e.preventDefault();
 
     try {
-  await axios.post("https://hotandcold-backend-4wd0.onrender.com/api/contact-footer", formData);
+  await axios.post(API_ENDPOINTS.CONTACT_FOOTER, formData);
   mostrarMensaje("Mensaje enviado correctamente", "success");
   setFormData({
     nombre: "",

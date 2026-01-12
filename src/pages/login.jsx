@@ -4,7 +4,8 @@ import { FaUser, FaLock } from 'react-icons/fa';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import '../components/login.css';
-import { useAuth } from '../context/AuthContext'; // ✅ Importar contexto
+import { useAuth } from '../context/AuthContext';
+import { API_ENDPOINTS } from '../config/apiConfig';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -28,7 +29,7 @@ function Login() {
     setSuccess('');
 
     try {
-      const res = await fetch('https://hotandcold-backend-4wd0.onrender.com/api/login', {
+      const res = await fetch(API_ENDPOINTS.LOGIN, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

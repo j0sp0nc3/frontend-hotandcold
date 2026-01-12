@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProductList from "../components/ProductList";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import { API_ENDPOINTS } from "../config/apiConfig";
 
 function HomePage() {
   // Evitar añadir event listener en cada render
@@ -112,7 +113,7 @@ function HomePage() {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://hotandcold-backend-4wd0.onrender.com/api/contact", {
+      const response = await fetch(API_ENDPOINTS.CONTACT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -306,8 +307,8 @@ function HomePage() {
 
 
       <div>
-        <div class="card-trabajos">
-          <div class="card-trabajos-contenido">
+        <div className="card-trabajos">
+          <div className="card-trabajos-contenido">
             <h2>Nuestros trabajos</h2>
             <p>
               Proyectos que hablan por nosotros. Calidad, precisión y compromiso en cada instalación.
@@ -375,9 +376,9 @@ function HomePage() {
         )}
       </div>
 
-      <div class="card-container-home">
-        <div class="overlay"></div>
-        <div class="card-text">
+      <div className="card-container-home">
+        <div className="overlay"></div>
+        <div className="card-text">
           <h3>El papel de la energía solar en la eficiencia energética</h3>
           <p>
             En términos más profesionales o técnicos, podemos decir que la eficiencia energética es la ciencia o técnica que estudia el consumo inteligente de energía. Es decir, usar sólo lo que necesitas, ni más ni menos, y todos los mecanismos asociados que ayudan a conseguir una optimización. Una eficiencia energética y una calefacción o climatización inteligentes, que se traducen en un ahorro sobre cualquier sistema o instalación que nos podamos encontrar.
@@ -389,8 +390,8 @@ function HomePage() {
 
 
 
-      <div class="card-trabajos">
-        <div class="card-trabajos-contenido">
+      <div className="card-trabajos">
+        <div className="card-trabajos-contenido">
           <h2>Nuestro Sello Diferenciador</h2>
 
         </div>
@@ -398,29 +399,29 @@ function HomePage() {
 
 
 
-      <div class="flex gap-4 mt-8 justify-between w-full md:w-[48%] h-[350px] px-4">
-        <div class="bg-[#b45c3d] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
-          <div class="text-left px-4 py-6 w-full">
-            <h3 class="font-bold text-xl text-white mb-4">Puntualidad</h3>
-            <p class="text-sm text-white">
+      <div className="flex gap-4 mt-8 justify-between w-full md:w-[48%] h-[350px] px-4">
+        <div className="bg-[#b45c3d] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
+          <div className="text-left px-4 py-6 w-full">
+            <h3 className="font-bold text-xl text-white mb-4">Puntualidad</h3>
+            <p className="text-sm text-white">
               Hacemos que la Climatización, aire acondicionado y energía solar sea fácil, por lo que obtendrá un mejor servicio de energía a un mejor precio.
             </p>
           </div>
         </div>
 
-        <div class="bg-[#12222e] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
-          <div class="text-left px-4 py-6 w-full">
-            <h3 class="font-bold text-xl text-white mb-4">Experiencia en el rubro</h3>
-            <p class="text-sm text-white">
+        <div className="bg-[#12222e] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
+          <div className="text-left px-4 py-6 w-full">
+            <h3 className="font-bold text-xl text-white mb-4">Experiencia en el rubro</h3>
+            <p className="text-sm text-white">
               Aportamos soluciones de eficiencia energética con sistemas innovadores, adaptados a las necesidades de cada cliente.
             </p>
           </div>
         </div>
 
-        <div class="bg-[#cfdde9] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
-          <div class="text-left px-4 py-6 w-full">
-            <h3 class="font-bold text-xl text-black mb-4">Manejo de proyectos bajo presión</h3>
-            <p class="text-sm text-black">
+        <div className="bg-[#cfdde9] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
+          <div className="text-left px-4 py-6 w-full">
+            <h3 className="font-bold text-xl text-black mb-4">Manejo de proyectos bajo presión</h3>
+            <p className="text-sm text-black">
               Brindamos servicios de instalación y mantenimiento de sistemas de calefacción central con tecnologías avanzadas.
             </p>
           </div>
