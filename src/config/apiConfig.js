@@ -8,7 +8,7 @@ const isDevelopment = import.meta.env.MODE === 'development';
 
 // URL base de la API
 const API_BASE_URL = import.meta.env.VITE_API_URL || 
-  (isDevelopment ? 'http://localhost:3000' : 'https://backend.hotandcold.cl');
+  (isDevelopment ? 'http://localhost:3000' : 'https://backend-hotandcold.onrender.com');
 
 console.log(`🌐 API_BASE_URL: ${API_BASE_URL}`);
 
