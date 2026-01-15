@@ -14,6 +14,6 @@ export default defineConfig({
     strictPort: false,
     cors: true,
     // Agregamos esta línea para autorizar el dominio de Render
-    allowedHosts: ['frontend-hotandcold.onrender.com'],
+    allowedHosts: ['frontend-hotandcold.onrender.com', 'hotandcold.cl', 'www.hotandcold.cl'],
   },
 })
