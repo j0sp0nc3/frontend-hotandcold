@@ -16,6 +16,14 @@ function Login() {
 
   const { login } = useAuth(); // ✅ Obtener función login desde contexto
 
+  // Limpiar formulario al cargar la página
+  useEffect(() => {
+    setUsername('');
+    setPassword('');
+    setError('');
+    setSuccess('');
+  }, []);
+
   useEffect(() => {
     document.body.classList.add('login-page');
     return () => {
@@ -29,27 +37,23 @@ function Login() {
     setSuccess('');
 
     try {
-      const res = await fetch(API_ENDPOINTS.LOGIN, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
+      // Usar la función login del contexto que maneja todo
+      const result = await login({ username, password });
 
-      const data = await res.json();
+      if (result.success) {
+        setSuccess(`Bienvenido, ${result.data.username}`);
+        setUsername('');
+        setPassword('');
 
-      if (!res.ok) throw new Error(data.message || 'Error en login');
-
-      // ✅ Guardar usuario en contexto
-      login(data);
-
-      setSuccess(`Bienvenido, ${data.username}`);
-      setUsername('');
-      setPassword('');
-
-      // ✅ Redirigir tras login exitoso
-      navigate('/image');
+        // Redirigir tras login exitoso
+        setTimeout(() => {
+          navigate('/image');
+        }, 500);
+      } else {
+        setError(result.error || 'Error en login');
+      }
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'Error en login');
     }
   };
 
@@ -61,7 +65,7 @@ function Login() {
           <h1>Bienvenido</h1>
           <p>Accede a tu cuenta para continuar</p>
 
-          <form onSubmit={handleSubmit} className="login-form">
+          <form onSubmit={handleSubmit} className="login-form" autoComplete="off">
             <div className="login-input-group">
               <FaUser className="login-icon" />
               <input
@@ -71,6 +75,8 @@ function Login() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 className="login-input underline"
+                autoComplete="off"
+                name="username-field"
               />
             </div>
             <div className="login-input-group">
@@ -82,6 +88,8 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 className="login-input underline"
+                autoComplete="new-password"
+                name="password-field"
               />
             </div>
 

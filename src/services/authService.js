@@ -6,11 +6,11 @@ import api from './api';
 export const authService = {
   /**
    * Login de usuario
-   * @param {Object} credentials - { email, password }
+   * @param {Object} credentials - { username, password }
    */
   login: async (credentials) => {
     try {
-      const response = await api.post('/auth/login', credentials);
+      const response = await api.post('/api/login', credentials);
       return response.data;
     } catch (error) {
       throw new Error(error.response?.data?.message || 'Error al iniciar sesión');
@@ -23,7 +23,7 @@ export const authService = {
    */
   register: async (userData) => {
     try {
-      const response = await api.post('/auth/register', userData);
+      const response = await api.post('/api/register', userData);
       return response.data;
     } catch (error) {
       throw new Error(error.response?.data?.message || 'Error al registrar usuario');
@@ -35,7 +35,7 @@ export const authService = {
    */
   logout: async () => {
     try {
-      await api.post('/auth/logout');
+      // No hay endpoint de logout en backend, solo limpiar localStorage
       localStorage.removeItem('user');
     } catch (error) {
       console.error('Error en logout:', error);
@@ -47,8 +47,12 @@ export const authService = {
    */
   verifyToken: async () => {
     try {
-      const response = await api.get('/auth/verify');
-      return response.data;
+      // Por ahora no hay endpoint de verificación, simplemente verificar que existe el token
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      if (user.token) {
+        return { valid: true };
+      }
+      throw new Error('Token no encontrado');
     } catch (error) {
       throw new Error('Token inválido');
     }

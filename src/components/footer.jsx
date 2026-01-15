@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import './navbar.css';
 import { contactService } from "../services";
 
@@ -12,6 +12,18 @@ const Footer = React.memo(() => {
   });
 
   const [mensaje, setMensaje] = useState({ texto: "", tipo: "" });
+
+  // Limpiar formulario al cargar la página
+  useEffect(() => {
+    setFormData({
+      nombre: "",
+      apellido: "",
+      telefono: "",
+      email: "",
+      mensaje: ""
+    });
+    setMensaje({ texto: "", tipo: "" });
+  }, []);
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;

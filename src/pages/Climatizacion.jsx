@@ -51,22 +51,22 @@ const Climatizacion = () => {
 </div>
       {/* Cards */}
       <div class="cards-container">
-        <div class="clima-card">
+        <div class="clima-card clima-card-color-1">
           <h2>Atención personalizada y asesoría técnica experta</h2>
           <p>Evaluación del espacio y recomendaciones personalizadas según el uso, tipo de inmueble y eficiencia energética.</p>
         </div>
 
-        <div class="clima-card">
+        <div class="clima-card clima-card-color-2">
           <h2>Certificación y cumplimiento normativo</h2>
           <p>Técnicos certificados y cumplimiento con todas las normativas chilenas e internacionales de instalación y seguridad.</p>
         </div>
 
-        <div class="clima-card">
+        <div class="clima-card clima-card-color-3">
           <h2>Garantía extendida y mantenimiento preventivo</h2>
           <p> Servicios con garantía prolongada y planes de mantención periódica para alargar la vida útil de los equipos.</p>
         </div>
 
-        <div class="clima-card">
+        <div class="clima-card clima-card-color-4">
           <h2>Eficiencia energética y tecnología de punta</h2>
           <p>Uso de equipos de última generación con bajo consumo eléctrico y soluciones sostenibles que reducen la huella ambiental del cliente.</p>
         </div>

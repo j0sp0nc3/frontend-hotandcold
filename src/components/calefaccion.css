@@ -61,7 +61,7 @@
 .card-calefaccion {
   background-color: #f2f2f2;
   padding: 1rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -69,18 +69,19 @@
   min-height: 250px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .card-calefaccion .card-contenido {
-  padding-left: 3rem;
-  padding-right: 1rem;
+  padding: 2rem;
+  text-align: center;
 }
 
 .card-calefaccion h2 {
   font-size: 2rem; 
   font-weight: 400;    
-  text-align: left;
-  margin-bottom: 1rem;
+  text-align: center;
+  margin: 0;
 }
 
 
@@ -174,6 +175,28 @@
   color: black;
   font-family: sans-serif;
   box-sizing: border-box;
+  border-radius: 15px;
+}
+
+/* Colores armónicos para cada tarjeta */
+.calefaccion-card-color-1 {
+  background-color: #d4e7f4; /* Azul claro suave */
+}
+
+.calefaccion-card-color-2 {
+  background-color: #e8f4ea; /* Verde menta claro */
+}
+
+.calefaccion-card-color-3 {
+  background-color: #fef3e2; /* Amarillo suave/crema */
+}
+
+.calefaccion-card-color-4 {
+  background-color: #f0e4f7; /* Lavanda suave */
+}
+
+.calefaccion-card-color-5 {
+  background-color: #fce4ec; /* Rosa suave */
 }
 
 /* Los dos primeros: cada uno ocupa 3/6 = 50% */

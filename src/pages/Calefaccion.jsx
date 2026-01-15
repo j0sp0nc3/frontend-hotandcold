@@ -65,27 +65,27 @@ Ofrecemos soluciones integrales tanto para inmuebles nuevos como para remodelaci
 
 
 <div className="cards-container-calefaccion">
-  <div className="calefaccion-card">
+  <div className="calefaccion-card calefaccion-card-color-1">
     <h2>¿Por qué calefacción centralizada?</h2>
     <p>Mejora la calidad del aire, elimina puntos fríos y reduce el consumo energético. Un solo sistema controla todo tu ambiente.</p>
   </div>
 
-  <div className="calefaccion-card">
+  <div className="calefaccion-card calefaccion-card-color-2">
     <h2>Ideal para inmuebles exigentes</h2>
     <p>Perfecta para casas de más de un piso, oficinas, clínicas, colegios o centros comerciales. Control zonificado disponible.</p>
   </div>
 
-  <div className="calefaccion-card">
+  <div className="calefaccion-card calefaccion-card-color-3">
     <h2>Compatibilidad con energía solar y bombas de calor</h2>
     <p>Nuestros sistemas permiten integración con fuentes renovables, lo que disminuye costos operativos y el impacto ambiental.</p>
   </div>
 
-  <div className="calefaccion-card">
+  <div className="calefaccion-card calefaccion-card-color-4">
     <h2>Instalación limpia y planificada</h2>
     <p>Nos adaptamos a las etapas de tu proyecto, ya sea en obra gris o terminado, con mínima intervención estética.</p>
   </div>
 
-  <div className="calefaccion-card">
+  <div className="calefaccion-card calefaccion-card-color-5">
     <h2>¿Cuánto puedes ahorrar?</h2>
     <p>Un sistema bien diseñado puede reducir hasta un 30% en gastos de calefacción en comparación con métodos tradicionales.</p>
   </div>

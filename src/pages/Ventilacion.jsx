@@ -47,22 +47,22 @@ function HomePage() {
             </div>
 
             <div class="cards-container">
-                <div class="clima-card">
+                <div class="clima-card clima-card-color-1">
                     <h2>Mejora la calidad del aire</h2>
                     <p>Elimina contaminantes, olores y partículas en suspensión, creando espacios más saludables.</p>
                 </div>
 
-                <div class="clima-card">
+                <div class="clima-card clima-card-color-2">
                     <h2>Control de humedad</h2>
                     <p>Evita la condensación, hongos y problemas estructurales gracias a una ventilación adecuada.</p>
                 </div>
 
-                <div class="clima-card">
+                <div class="clima-card clima-card-color-3">
                     <h2>Cumplimiento normativo</h2>
                     <p>Instalamos sistemas según las normativas de calidad del aire interior y seguridad vigentes.</p>
                 </div>
 
-                <div class="clima-card">
+                <div class="clima-card clima-card-color-4">
                     <h2>Soluciones a medida</h2>
                     <p>Diseñamos sistemas de ventilación adaptados al tipo de inmueble y sus necesidades.</p>
                 </div>

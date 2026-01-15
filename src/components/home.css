@@ -271,45 +271,60 @@
 
 
 
+/* Contenedor de cards del home */
+.cards-home-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Responsive para cards home */
+@media (min-width: 769px) {
+  .cards-home-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1281px) {
+  .cards-home-container {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1600px;
+  }
+}
+
   
   .card-custom {
-    width: 300px;
-    height: 650px;
-    min-height: 650px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 600px;
+    min-height: 600px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
     display: flex;
     flex-direction: column;
-    transition: width 0.3s ease;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  /* Móviles pequeños */
+  @media (max-width: 480px) {
+    .card-custom {
+      height: 550px;
+      min-height: 550px;
+    }
   }
   
-  /* A partir de 768px (pantallas medianas, como tablets apaisadas) */
+  /* A partir de 768px (pantallas medianas) */
   @media (min-width: 768px) {
     .card-custom {
-      width: 400px;
       height: 600px;
-    }
-  }
-  
-  /* A partir de 1024px (pantallas grandes como laptops) */
-  @media (min-width: 1024px) {
-    .card-custom {
-      width: 400px;
-    }
-  }
-  
-  /* A partir de 1280px (pantallas aún más grandes) */
-  @media (min-width: 1280px) {
-    .card-custom {
-      width: 350px;
-      height: 600px;
-    }
-  }
-   /* A partir de 1280px (pantallas aún más grandes) */
-   @media (min-width: 1900px) {
-    .card-custom {
-      width: 550px;
-      height: 600px;
+      min-height: 600px;
     }
   }
   

@@ -87,6 +87,20 @@ function HomePage() {
   // Message state
   const [mensaje, setMensaje] = useState({ texto: "", tipo: "" });
 
+  // Limpiar formulario al cargar la página
+  useEffect(() => {
+    setFormData({
+      nombre: "",
+      apellido: "",
+      email: "",
+      telefono: "",
+      direccion: "",
+      rol: "",
+      mensaje: ""
+    });
+    setMensaje({ texto: "", tipo: "" });
+  }, []);
+
   // Controla cambios en inputs
   function handleChange(e) {
     const { id, value, type, checked } = e.target;
@@ -252,7 +266,7 @@ function HomePage() {
       </div>
 
       <div className="mt-4">
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="cards-home-container">
 
           <div className="card-custom">
             <div className="bg-cover bg-center bg-no-repeat h-2/3 bg-[url('/assets/h2.avif')]"></div>
@@ -389,7 +403,7 @@ function HomePage() {
 
 
 
-      <div className="flex gap-4 mt-8 justify-between w-full md:w-[48%] h-[350px] px-4">
+      <div className="flex flex-col md:flex-row gap-4 mt-8 justify-between w-full md:w-[48%] px-4">
         <div className="bg-[#f5b5a1] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
           <div className="text-left px-4 py-6 w-full">
             <h3 className="font-bold text-xl text-white mb-4">Puntualidad</h3>

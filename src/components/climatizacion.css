@@ -54,6 +54,32 @@
   color: white;
 }
 
+.card-calefaccion {
+  background-color: #f2f2f2;
+  padding: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-calefaccion .card-contenido {
+  padding: 2rem;
+  text-align: center;
+}
+
+.card-calefaccion h2 {
+  font-size: 2rem; 
+  font-weight: 400;    
+  text-align: center;
+  margin: 0;
+}
+
 
 
 
@@ -73,7 +99,26 @@
     padding: 50px;
     color: black;
     font-family: sans-serif;
+    border-radius: 15px;
   }
+
+  /* Colores armónicos para cada tarjeta */
+  .clima-card-color-1 {
+    background-color: #d4e7f4; /* Azul claro suave */
+  }
+
+  .clima-card-color-2 {
+    background-color: #e8f4ea; /* Verde menta claro */
+  }
+
+  .clima-card-color-3 {
+    background-color: #fef3e2; /* Amarillo suave/crema */
+  }
+
+  .clima-card-color-4 {
+    background-color: #f0e4f7; /* Lavanda suave */
+  }
+
   .clima-card-b {
     background-color: #f2f2f2;
     height: 350px;
@@ -83,6 +128,7 @@
     padding: 50px;
     color: black;
     font-family: sans-serif;
+    border-radius: 15px;
   }
   .clima-card-b h2 {
     font-size: 20px;

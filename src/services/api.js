@@ -4,11 +4,16 @@ import { API_ENDPOINTS } from '../config/apiConfig';
 // API Key para autenticar la aplicación frontend - debe estar en .env
 const API_KEY = import.meta.env.VITE_API_KEY;
 
+// URL base de la API
+const isDevelopment = import.meta.env.MODE === 'development';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 
+  (isDevelopment ? 'http://localhost:3000' : 'https://backend.hotandcold.cl');
+
 /**
  * Instancia de Axios con configuración base
  */
 const api = axios.create({
-  baseURL: API_ENDPOINTS.BASE_URL,
+  baseURL: API_BASE_URL,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
