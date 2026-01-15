@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { API_ENDPOINTS } from '../config/apiConfig';
 
-// API Key para autenticar la aplicación frontend
-const API_KEY = import.meta.env.VITE_API_KEY || 'hotandcold-frontend-2026-key';
+// API Key para autenticar la aplicación frontend - debe estar en .env
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 /**
  * Instancia de Axios con configuración base
