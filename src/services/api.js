@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { API_ENDPOINTS } from '../config/apiConfig';
 
+// API Key para autenticar la aplicación frontend
+const API_KEY = import.meta.env.VITE_API_KEY || 'hotandcold-frontend-2026-key';
+
 /**
  * Instancia de Axios con configuración base
  */
@@ -8,15 +11,22 @@ const api = axios.create({
   baseURL: API_ENDPOINTS.BASE_URL,
   timeout: 10000,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'X-API-Key': API_KEY
   }
 });
 
 /**
- * Interceptor para requests - agregar token automáticamente
+ * Interceptor para requests - agregar token y API key automáticamente
  */
 api.interceptors.request.use(
   (config) => {
+    // Agregar API Key si no está presente
+    if (!config.headers['X-API-Key']) {
+      config.headers['X-API-Key'] = API_KEY;
+    }
+    
+    // Agregar token de usuario si está logueado
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     if (user.token) {
       config.headers.Authorization = `Bearer ${user.token}`;
