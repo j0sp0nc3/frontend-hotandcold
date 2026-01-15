@@ -1,39 +1,57 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";  // Importa los elementos de React Router
-import HomePage from "./pages/HomePage";
-import Climatizacion from './pages/Climatizacion';
-import Tienda from './pages/tienda';
-import ImageUpload from "./components/ImageUpload";
-import ProductDetail from "./components/ProductDetail"; 
-import Ventilacion from "./pages/Ventilacion";
-import Calefaccion from "./pages/Calefaccion";
-import Login from "./pages/login";
+import { lazy, Suspense } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute';
+
+// Lazy loading de páginas para optimizar carga inicial
+const HomePage = lazy(() => import("./pages/HomePage"));
+const Climatizacion = lazy(() => import('./pages/Climatizacion'));
+const Tienda = lazy(() => import('./pages/tienda'));
+const Ventilacion = lazy(() => import("./pages/Ventilacion"));
+const Calefaccion = lazy(() => import("./pages/Calefaccion"));
+const Login = lazy(() => import("./pages/login"));
+const ImageUpload = lazy(() => import("./components/ImageUpload"));
+const ProductDetail = lazy(() => import("./components/ProductDetail"));
+const TestMejoras = lazy(() => import("./pages/TestMejoras"));
+
+// Componente de carga
+const LoadingFallback = () => (
+  <div style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    fontSize: '1.5rem',
+    color: '#333'
+  }}>
+    Cargando...
+  </div>
+);
 
 function App() {
   return (
-    <Router>  {/* Envolver todo en <Router> */}
-      <Routes>  {/* Definir las rutas de la aplicación */}
-        <Route path="/" element={<HomePage />} /> 
-        <Route path="/climatizacion" element={<Climatizacion />} />  {/* Ruta para la página de climatización */}
-        <Route path="/tienda" element={<Tienda />} />
-        <Route path="/ventilacion" element={<Ventilacion />} /> 
-        {/* Aquí se define la ruta para FileUpload */}
-      
-        <Route path="/producto/:id" element={<ProductDetail />} />
-        <Route path="/calefaccion" element={<Calefaccion />} />
-        <Route path="/login" element={<Login />} />
-         {/* Protegemos esta ruta con PrivateRoute */}
-      <Route 
-        path="/image" 
-        element={
-          <PrivateRoute>
-            <ImageUpload />
-          </PrivateRoute>
-        } 
-      />
-      
-      
-      </Routes>
+    <Router>
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} /> 
+          <Route path="/climatizacion" element={<Climatizacion />} />
+          <Route path="/tienda" element={<Tienda />} />
+          <Route path="/ventilacion" element={<Ventilacion />} /> 
+          <Route path="/producto/:id" element={<ProductDetail />} />
+          <Route path="/calefaccion" element={<Calefaccion />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/test-mejoras" element={<TestMejoras />} />
+          
+          {/* Ruta protegida */}
+          <Route 
+            path="/image" 
+            element={
+              <PrivateRoute>
+                <ImageUpload />
+              </PrivateRoute>
+            } 
+          />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }

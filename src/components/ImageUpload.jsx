@@ -1,15 +1,7 @@
 import React, { useState, useEffect,useRef } from 'react';
 import axios from 'axios';
 import "./admin.css";
-import { db } from "../firebaseConfig";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-  updateDoc
-} from 'firebase/firestore';
+import { productService } from "../services";
 import Navbar from "../components/navbar";
 import Swal from 'sweetalert2';
 
@@ -42,19 +34,19 @@ const ImageUpload = () => {
 
   const fetchProductos = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, "productos"));
-      const productosData = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+      const response = await productService.getAll();
+      const productosData = response.data || [];
       setProductos(productosData);
     } catch (error) {
       console.error("Error al obtener productos:", error);
+      mostrarMensaje("Error al cargar productos.", "error");
     }
   };
 
   const handleUpload = async () => {
     if (!file) return alert("Selecciona una imagen");
+    if (!title || !description) return alert("Título y descripción son obligatorios");
+    
     setLoading(true);
 
     const formData = new FormData();
@@ -62,23 +54,25 @@ const ImageUpload = () => {
     formData.append("upload_preset", "my_custom_preset");
 
     try {
+      // Subir imagen a Cloudinary
       const res = await axios.post(
         `https://api.cloudinary.com/v1_1/dmmlobp9k/image/upload`,
         formData
       );
 
-      setImageUrl(res.data.secure_url);
+      const uploadedImageUrl = res.data.secure_url;
 
-      await addDoc(collection(db, "productos"), {
-        title,
-        description,
-        imageUrl,
-        createdAt: new Date(),
+      // Crear producto en backend
+      await productService.create({
+        titulo: title,
+        descripcion: description,
+        imagenUrl: uploadedImageUrl,
       });
 
       setTitle("");
       setDescription("");
       setFile(null);
+      setImageUrl("");
       mostrarMensaje("Producto agregado correctamente.", "success");
       fetchProductos();
     } catch (err) {
@@ -103,7 +97,7 @@ const ImageUpload = () => {
 
   if (result.isConfirmed) {
     try {
-      await deleteDoc(doc(db, "productos", id));
+      await productService.delete(id);
       mostrarMensaje("Producto eliminado correctamente.", "success");
       fetchProductos();
       Swal.fire(
@@ -125,11 +119,10 @@ const ImageUpload = () => {
 
  const handleEditInit = (producto) => {
   setProductoEditando(producto);
-  setEditImageUrl(producto.imageUrl);
+  setEditImageUrl(producto.imagenUrl);
   setEditFile(null);
-  setShowForm(false); // Oculta formulario nuevo al editar
+  setShowForm(false);
 
-  // Espera a que el componente se actualice antes de hacer scroll
   setTimeout(() => {
     if (editFormRef.current) {
       editFormRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -139,7 +132,7 @@ const ImageUpload = () => {
 
 
   const handleEditSave = async () => {
-    if (!productoEditando.title || !productoEditando.description) {
+    if (!productoEditando.titulo || !productoEditando.descripcion) {
       return alert("Título y descripción son obligatorios");
     }
 
@@ -147,6 +140,7 @@ const ImageUpload = () => {
     let newImageUrl = editImageUrl;
 
     try {
+      // Si hay nueva imagen, subirla a Cloudinary
       if (editFile) {
         const formData = new FormData();
         formData.append("file", editFile);
@@ -159,11 +153,11 @@ const ImageUpload = () => {
         newImageUrl = res.data.secure_url;
       }
 
-      const productoRef = doc(db, "productos", productoEditando.id);
-      await updateDoc(productoRef, {
-        title: productoEditando.title,
-        description: productoEditando.description,
-        imageUrl: newImageUrl,
+      // Actualizar producto en backend
+      await productService.update(productoEditando.id, {
+        titulo: productoEditando.titulo,
+        descripcion: productoEditando.descripcion,
+        imagenUrl: newImageUrl,
       });
 
       setProductoEditando(null);
@@ -187,7 +181,7 @@ const ImageUpload = () => {
 
   useEffect(() => {
     const resultado = productos.filter((producto) =>
-      producto.title.toLowerCase().includes(busqueda.toLowerCase())
+      producto.titulo?.toLowerCase().includes(busqueda.toLowerCase())
     );
     setProductosFiltrados(resultado);
   }, [busqueda, productos]);
@@ -269,9 +263,9 @@ const ImageUpload = () => {
             <input
               id="editTitle"
               type="text"
-              value={productoEditando.title}
+              value={productoEditando.titulo}
               onChange={(e) =>
-                setProductoEditando({ ...productoEditando, title: e.target.value })
+                setProductoEditando({ ...productoEditando, titulo: e.target.value })
               }
             />
           </div>
@@ -280,9 +274,9 @@ const ImageUpload = () => {
             <label htmlFor="editDescription">Descripción</label>
             <textarea
               id="editDescription"
-              value={productoEditando.description}
+              value={productoEditando.descripcion}
               onChange={(e) =>
-                setProductoEditando({ ...productoEditando, description: e.target.value })
+                setProductoEditando({ ...productoEditando, descripcion: e.target.value })
               }
             />
           </div>
@@ -326,13 +320,13 @@ const ImageUpload = () => {
           productosFiltrados.map(producto => (
             <div key={producto.id} className="admin-producto-card">
               <img
-                src={producto.imageUrl}
-                alt={producto.title}
+                src={producto.imagenUrl}
+                alt={producto.titulo}
                 className="admin-producto-img"
               />
               <div>
-                <h3 className="admin-producto-title">{producto.title}</h3>
-                <p className="admin-producto-description">{producto.description}</p>
+                <h3 className="admin-producto-title">{producto.titulo}</h3>
+                <p className="admin-producto-description">{producto.descripcion}</p>
                 <button onClick={() => handleEditInit(producto)} className="admin-btn edit-btn">Editar</button>
                 <button onClick={() => handleDelete(producto.id)} className="admin-btn delete-btn">Eliminar</button>
               </div>

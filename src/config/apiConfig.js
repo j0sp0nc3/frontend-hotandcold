@@ -24,6 +24,9 @@ export const API_ENDPOINTS = {
   CONTACT: `${API_BASE_URL}/api/contact`,
   CONTACT_FOOTER: `${API_BASE_URL}/api/contact-footer`,
   
+  // Productos
+  PRODUCTS: `${API_BASE_URL}/api/products`,
+  
   // Health check
   HEALTH: `${API_BASE_URL}/health`
 };

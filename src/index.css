@@ -5,14 +5,15 @@
 @tailwind utilities;
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
 * {
@@ -25,4 +26,8 @@ html, body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+}
+
+body {
+  padding-top: 100px; /* Compensar el navbar fixed */
 }

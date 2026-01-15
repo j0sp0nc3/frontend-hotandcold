@@ -1,0 +1,179 @@
+/* Sección de cotización con estilo similar al navbar */
+.cotizacion-section {
+  background-color: rgba(91, 172, 169, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-top: 2rem;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cotizacion-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.cotizacion-form {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  align-items: start;
+}
+
+.cotizacion-form > div:not(:last-child) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.cotizacion-form label {
+  display: block;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.cotizacion-form input[type="text"],
+.cotizacion-form input[type="email"],
+.cotizacion-form input[type="tel"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  color: white;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.cotizacion-form input[type="text"]::placeholder,
+.cotizacion-form input[type="email"]::placeholder,
+.cotizacion-form input[type="tel"]::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cotizacion-form select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  color: white;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.cotizacion-form select option {
+  background: rgba(91, 172, 169, 0.98);
+  color: white;
+  padding: 0.5rem;
+}
+
+.cotizacion-form select:focus {
+  outline: none;
+  border-color: white;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.cotizacion-form input[type="text"]:focus,
+.cotizacion-form input[type="email"]:focus,
+.cotizacion-form input[type="tel"]:focus {
+  outline: none;
+  border-color: white;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.cotizacion-form input[type="checkbox"] {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.cotizacion-form button[type="submit"] {
+  background: linear-gradient(135deg, #b45c3d 0%, #d4744f 100%);
+  color: white;
+  padding: 0.85rem 2.5rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(180, 92, 61, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.cotizacion-form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(180, 92, 61, 0.4);
+  background: linear-gradient(135deg, #a14d30 0%, #c06541 100%);
+}
+
+.cotizacion-form button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+/* Mensajes de alerta */
+.mensaje {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.mensaje.success {
+  background: rgba(76, 175, 80, 0.9);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.mensaje.error {
+  background: rgba(244, 67, 54, 0.9);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .cotizacion-form {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cotizacion-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .cotizacion-title {
+    font-size: 1.4rem;
+  }
+
+  .cotizacion-form {
+    grid-template-columns: 1fr;
+  }
+
+  .cotizacion-form button[type="submit"] {
+    width: 100%;
+  }
+}

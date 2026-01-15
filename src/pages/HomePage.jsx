@@ -3,6 +3,7 @@ import ProductList from "../components/ProductList";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { API_ENDPOINTS } from "../config/apiConfig";
+import "./HomePage.css";
 
 function HomePage() {
   // Evitar añadir event listener en cada render
@@ -166,13 +167,13 @@ function HomePage() {
         </div>
       )}
 
-      <div className="bg-[#8ad1da] mt-6 w-full mx-auto p-4 rounded-lg shadow-lg flex flex-col items-center text-white">
-        <h2 className="text-xl font-light mb-4">¡Obtenga una cotización sin compromiso hoy!</h2>
+      <div className="cotizacion-section">
+        <h2 className="cotizacion-title">¡Obtenga una cotización sin compromiso hoy!</h2>
 
-        <form onSubmit={handleSubmit} className="flex gap-3 mb-6 w-full flex-row flex-wrap">
+        <form onSubmit={handleSubmit} className="cotizacion-form">
 
-          <div className="w-1/5">
-            <label htmlFor="nombre" className="block">Nombre</label>
+          <div>
+            <label htmlFor="nombre">Nombre</label>
             <input
               type="text"
               id="nombre"
@@ -180,11 +181,10 @@ function HomePage() {
               required
               value={formData.nombre}
               onChange={handleChange}
-              className="w-full p-3 border border-white bg-transparent text-white rounded-md"
             />
           </div>
-          <div className="w-1/5">
-            <label htmlFor="apellido" className="block">Apellido</label>
+          <div>
+            <label htmlFor="apellido">Apellido</label>
             <input
               type="text"
               id="apellido"
@@ -192,11 +192,10 @@ function HomePage() {
               required
               value={formData.apellido}
               onChange={handleChange}
-              className="w-full p-3 border border-white bg-transparent text-white rounded-md"
             />
           </div>
-          <div className="w-1/5">
-            <label htmlFor="email" className="block">Email</label>
+          <div>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
@@ -204,11 +203,10 @@ function HomePage() {
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full p-3 border border-white bg-transparent text-white rounded-md"
             />
           </div>
-          <div className="w-1/6">
-            <label htmlFor="telefono" className="block">Teléfono</label>
+          <div>
+            <label htmlFor="telefono">Teléfono</label>
             <input
               type="tel"
               id="telefono"
@@ -216,11 +214,10 @@ function HomePage() {
               required
               value={formData.telefono}
               onChange={handleChange}
-              className="w-full p-3 border border-white bg-transparent text-white rounded-md"
             />
           </div>
-          <div className="w-1/6">
-            <label htmlFor="direccion" className="block">Dirección</label>
+          <div>
+            <label htmlFor="direccion">Dirección</label>
             <input
               type="text"
               id="direccion"
@@ -228,38 +225,26 @@ function HomePage() {
               required
               value={formData.direccion}
               onChange={handleChange}
-              className="w-full p-3 border border-white bg-transparent text-white rounded-md"
             />
           </div>
 
-          <div className="flex gap-4 justify-center w-full mt-4">
-            <div>
-              <input
-                type="checkbox"
-                id="dueno-casa"
-                checked={formData.rol === "Dueño de Casa"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              <label htmlFor="dueno-casa">Dueño de Casa</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="dueno-negocio"
-                checked={formData.rol === "Dueño de Negocio"}
-                onChange={handleChange}
-                className="mr-2"
-              />
-              <label htmlFor="dueno-negocio">Dueño de Negocio</label>
-            </div>
+          <div>
+            <label htmlFor="rol">Tipo de Cliente</label>
+            <select
+              id="rol"
+              name="rol"
+              required
+              value={formData.rol}
+              onChange={handleChange}
+            >
+              <option value="">Seleccione una opción</option>
+              <option value="Dueño de Casa">Dueño de Casa</option>
+              <option value="Dueño de Negocio">Dueño de Negocio</option>
+            </select>
           </div>
 
-          <div className="mt-4 w-full flex justify-center">
-            <button
-              type="submit"
-              className="bg-[#b45c3d] text-white px-4 py-2 rounded-full transition-colors duration-300"
-            >
+          <div style={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'center', marginTop: '0.5rem' }}>
+            <button type="submit">
               Enviar
             </button>
           </div>
@@ -304,9 +289,7 @@ function HomePage() {
         </div>
       </div>
 
-
-
-      <div>
+      <div style={{ marginBottom: '3rem' }}>
         <div className="card-trabajos">
           <div className="card-trabajos-contenido">
             <h2>Nuestros trabajos</h2>
@@ -386,10 +369,17 @@ function HomePage() {
         </div>
       </div>
 
+      <div className="card-container-home" style={{ marginBottom: '3rem' }}>
+        <div className="overlay"></div>
+        <div className="card-text">
+          <h3>El papel de la energía solar en la eficiencia energética</h3>
+          <p>
+            En términos más profesionales o técnicos, podemos decir que la eficiencia energética es la ciencia o técnica que estudia el consumo inteligente de energía. Es decir, usar sólo lo que necesitas, ni más ni menos, y todos los mecanismos asociados que ayudan a conseguir una optimización. Una eficiencia energética y una calefacción o climatización inteligentes, que se traducen en un ahorro sobre cualquier sistema o instalación que nos podamos encontrar.
+          </p>
+        </div>
+      </div>
 
-
-
-
+      <div style={{ marginBottom: '4rem' }}>
       <div className="card-trabajos">
         <div className="card-trabajos-contenido">
           <h2>Nuestro Sello Diferenciador</h2>
@@ -400,7 +390,7 @@ function HomePage() {
 
 
       <div className="flex gap-4 mt-8 justify-between w-full md:w-[48%] h-[350px] px-4">
-        <div className="bg-[#b45c3d] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
+        <div className="bg-[#f5b5a1] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
           <div className="text-left px-4 py-6 w-full">
             <h3 className="font-bold text-xl text-white mb-4">Puntualidad</h3>
             <p className="text-sm text-white">
@@ -409,7 +399,7 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="bg-[#12222e] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
+        <div className="bg-[#87b5a5] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
           <div className="text-left px-4 py-6 w-full">
             <h3 className="font-bold text-xl text-white mb-4">Experiencia en el rubro</h3>
             <p className="text-sm text-white">
@@ -418,14 +408,15 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="bg-[#cfdde9] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
+        <div className="bg-[#a8b5d6] rounded-[20px] shadow-md flex-1 h-72 flex items-center">
           <div className="text-left px-4 py-6 w-full">
-            <h3 className="font-bold text-xl text-black mb-4">Manejo de proyectos bajo presión</h3>
-            <p className="text-sm text-black">
+            <h3 className="font-bold text-xl text-white mb-4">Manejo de proyectos bajo presión</h3>
+            <p className="text-sm text-white">
               Brindamos servicios de instalación y mantenimiento de sistemas de calefacción central con tecnologías avanzadas.
             </p>
           </div>
         </div>
+      </div>
       </div>
 
 

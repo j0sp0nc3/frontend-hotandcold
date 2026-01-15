@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import './navbar.css';
-import axios from "axios";
-import { API_ENDPOINTS } from "../config/apiConfig";
+import { contactService } from "../services";
 
-const Footer = () => {
+const Footer = React.memo(() => {
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -12,39 +11,41 @@ const Footer = () => {
     mensaje: ""
   });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-const [mensaje, setMensaje] = useState({ texto: "", tipo: "" });
-const mostrarMensaje = (texto, tipo = "success") => {
-  setMensaje({ texto, tipo });
-  setTimeout(() => {
-    setMensaje({ texto: "", tipo: "" });
-  }, 3000);
-};
+  const [mensaje, setMensaje] = useState({ texto: "", tipo: "" });
 
-  const handleSubmit = async (e) => {
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }, []);
+
+  const mostrarMensaje = useCallback((texto, tipo = "success") => {
+    setMensaje({ texto, tipo });
+    setTimeout(() => {
+      setMensaje({ texto: "", tipo: "" });
+    }, 3000);
+  }, []);
+
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
 
     try {
-  await axios.post(API_ENDPOINTS.CONTACT_FOOTER, formData);
-  mostrarMensaje("Mensaje enviado correctamente", "success");
-  setFormData({
-    nombre: "",
-    apellido: "",
-    telefono: "",
-    email: "",
-    mensaje: ""
-  });
-} catch (error) {
-  console.error("Error al enviar el formulario:", error);
-  mostrarMensaje("Error al enviar el formulario", "error");
-}
-
-  };
+      await contactService.sendMessage(formData);
+      mostrarMensaje("Mensaje enviado correctamente", "success");
+      setFormData({
+        nombre: "",
+        apellido: "",
+        telefono: "",
+        email: "",
+        mensaje: ""
+      });
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+      mostrarMensaje(error.message || "Error al enviar el formulario", "error");
+    }
+  }, [formData, mostrarMensaje]);
 
   return (
     <footer className="footer">
@@ -66,10 +67,10 @@ const mostrarMensaje = (texto, tipo = "success") => {
 
         {/* Sección del formulario */}
         {mensaje.texto && (
-  <div className={`admin-alert ${mensaje.tipo}`}>
-    {mensaje.texto}
-  </div>
-)}
+          <div className={`admin-alert ${mensaje.tipo}`}>
+            {mensaje.texto}
+          </div>
+        )}
 
         <div className="footer-form">
           <h2>Contact Info</h2>
@@ -126,6 +127,8 @@ const mostrarMensaje = (texto, tipo = "success") => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';
 
 export default Footer;

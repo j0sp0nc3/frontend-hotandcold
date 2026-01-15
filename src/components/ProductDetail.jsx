@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { db } from "../firebaseConfig";
+import { productService } from "../services";
 import Navbar from "../components/navbar"; // Importa el Navbar
-import { doc, getDoc } from "firebase/firestore";
 import Footer from "../components/footer";
 import "./home.css";
 
@@ -12,12 +11,15 @@ function ProductDetail() {
 
   useEffect(() => {
     const fetchProductDetail = async () => {
-      const productDoc = doc(db, "productos", id);
-      const productSnapshot = await getDoc(productDoc);
-      if (productSnapshot.exists()) {
-        setProducto(productSnapshot.data());
-      } else {
-        console.log("Producto no encontrado");
+      try {
+        const response = await productService.getById(id);
+        if (response.success && response.data) {
+          setProducto(response.data);
+        } else {
+          console.log("Producto no encontrado");
+        }
+      } catch (error) {
+        console.error("Error al obtener producto:", error);
       }
     };
 
@@ -34,11 +36,11 @@ function ProductDetail() {
 
     <div className="product-detail">
       <div className="product-detail-left">
-        <img src={producto.imageUrl} alt={producto.title} className="product-detail-image" />
+        <img src={producto.imagenUrl} alt={producto.titulo} className="product-detail-image" />
       </div>
       <div className="product-detail-right">
-        <h2>{producto.title}</h2>
-        <p>{producto.description}</p>
+        <h2>{producto.titulo}</h2>
+        <p>{producto.descripcion}</p>
       </div>
     </div>
     <Footer />
