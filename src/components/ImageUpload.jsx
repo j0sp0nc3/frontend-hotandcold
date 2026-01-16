@@ -1,5 +1,4 @@
 import React, { useState, useEffect,useRef } from 'react';
-import axios from 'axios';
 import "./admin.css";
 import { productService } from "../services";
 import Navbar from "../components/navbar";
@@ -60,27 +59,11 @@ const ImageUpload = () => {
     setLoading(true);
 
     try {
-      // 1. Obtener firma del backend
-      const signatureResponse = await productService.getCloudinarySignature();
-      const { signature, timestamp, cloudName, apiKey, uploadPreset } = signatureResponse.data;
+      // Subir imagen directamente al backend
+      const uploadResponse = await productService.uploadImage(file);
+      const uploadedImageUrl = uploadResponse.data.url;
 
-      // 2. Preparar FormData con firma
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", uploadPreset);
-      formData.append("signature", signature);
-      formData.append("timestamp", timestamp);
-      formData.append("api_key", apiKey);
-
-      // 3. Subir imagen a Cloudinary con firma
-      const res = await axios.post(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        formData
-      );
-
-      const uploadedImageUrl = res.data.secure_url;
-
-      // 4. Crear producto en backend
+      // Crear producto en backend
       await productService.create({
         titulo: title,
         descripcion: description,
@@ -158,26 +141,10 @@ const ImageUpload = () => {
     let newImageUrl = editImageUrl;
 
     try {
-      // Si hay nueva imagen, subirla a Cloudinary con firma
+      // Si hay nueva imagen, subirla directamente al backend
       if (editFile) {
-        // 1. Obtener firma del backend
-        const signatureResponse = await productService.getCloudinarySignature();
-        const { signature, timestamp, cloudName, apiKey, uploadPreset } = signatureResponse.data;
-
-        // 2. Preparar FormData con firma
-        const formData = new FormData();
-        formData.append("file", editFile);
-        formData.append("upload_preset", uploadPreset);
-        formData.append("signature", signature);
-        formData.append("timestamp", timestamp);
-        formData.append("api_key", apiKey);
-
-        // 3. Subir imagen con firma
-        const res = await axios.post(
-          `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-          formData
-        );
-        newImageUrl = res.data.secure_url;
+        const uploadResponse = await productService.uploadImage(editFile);
+        newImageUrl = uploadResponse.data.url;
       }
 
       // Actualizar producto en backend

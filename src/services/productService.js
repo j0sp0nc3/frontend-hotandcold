@@ -89,18 +89,5 @@ export const productService = {
     } catch (error) {
       throw new Error(error.response?.data?.message || 'Error al subir imagen');
     }
-  },
-
-  /**
-   * Obtener firma de Cloudinary para subida segura
-   * Requiere autenticación JWT
-   */
-  getCloudinarySignature: async () => {
-    try {
-      const response = await api.post('/api/cloudinary/signature');
-      return response;
-    } catch (error) {
-      throw new Error(error.response?.data?.message || 'Error al obtener firma de Cloudinary');
-    }
   }
 };
